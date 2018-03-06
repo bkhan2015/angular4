@@ -5,6 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CorporateEmployeesComponent } from './corporate-employees/corporate-employees.component';
 import { CorporateEmployeesService } from './corporate-employees/corporate-employees.service';
+import {HttpClientModule} from '@angular/common/http';
+
+
 
 const routes: Routes = [
   {path: '', redirectTo: 'corporate-employees', pathMatch: 'full'},
@@ -19,6 +22,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule,
+    HttpClientModule,
     RouterModule.forRoot(
       <Routes>routes, {enableTracing: true} // <-- debugging -->
     )
