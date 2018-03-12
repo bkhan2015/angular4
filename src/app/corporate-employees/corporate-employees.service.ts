@@ -20,7 +20,7 @@ export class CorporateEmployeesService {
 
   getEmployees(): Observable<CorporateEmployeesModel[]>{
     return this.http.get<CorporateEmployeesModel[]>(this.employeeUrl)
-      .map(employees => employees.sort(employee => {
+      .map(employees => employees.map(employee => {
         if (employee.jobTitle === 'QA') {
           this.totalQA = this.totalQA + 1;
         }
@@ -37,8 +37,8 @@ export class CorporateEmployeesService {
           this.totalCFO = this.totalCFO + 1;
         }
         this.totalJobTitle =[this.totalQA, this.totalDev, this.totalMarketing, this.totalCEO, this.totalCFO];
-        return employee.name.localeCompare(employee.name)
-      }) )
+        return employee
+      }))
       .catch(this.handleError);
   }
   private handleError(err: HttpErrorResponse){
