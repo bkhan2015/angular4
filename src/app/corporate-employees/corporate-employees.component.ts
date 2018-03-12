@@ -10,15 +10,31 @@ import {CorporateEmployeesModel} from './corporate-employees.model';
 })
 
 export class CorporateEmployeesComponent implements OnInit {
-  employees: CorporateEmployeesModel[] = [];
-  errorMessage: string;
 
-  constructor(private router: Router, private corporateemplyeesservice: CorporateEmployeesService) { }
+  employees: CorporateEmployeesModel[] = [];
+  public pieChartData: number[] = [];
+  order: string = 'name';
+  errorMessage: string;
+  constructor(private router: Router, private corporateEmplyeesService: CorporateEmployeesService) { }
 
   ngOnInit() {
-  this.corporateemplyeesservice.getEmployees().subscribe(
-    employees => this.employees = employees,
-    error => this.errorMessage = error
-  )
+    this.corporateEmplyeesService.getEmployees().subscribe(
+      employees => {
+        this.employees = employees,
+        this.pieChartData = this.corporateEmplyeesService.totalJobTitle,
+        error => this.errorMessage = error
+      }
+    );
+  }
+  // pie
+  public pieChartLabels: string[] = ['QA', 'Developer', 'Marketing Specialist', 'CFO', 'CEO'];
+
+  pieChartType:string = 'pie';
+  // events
+  public chartClicked(e:any):void {
+    console.log(e);
+  }
+  public chartHovered(e:any):void {
+    console.log(e);
   }
 }

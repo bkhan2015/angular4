@@ -1,5 +1,5 @@
 <div>
-<h2>Corporate Employees</h2>
+  <h2><u>Corporate Employees</u></h2>
   <table class="table table-striped">
     <thead>
     <tr>
@@ -10,7 +10,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let employee of employees">
+    <tr *ngFor="let employee of employees | orderBy: order">
       <td>{{employee.name}}</td>
       <td>{{employee.jobTitle}}</td>
       <td>{{employee.tenure}}</td>
@@ -19,3 +19,13 @@
     </tbody>
   </table>
 </div>
+<h6>Employee by Job Title</h6>
+<div style="display: block">
+  <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          (chartHover)="chartHovered($event)">
+  </canvas>
+</div>
+
